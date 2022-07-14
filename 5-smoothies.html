@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Bootstrap : CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<style>
+  .fruitty-sliding-container {
+    height: 200vh;
+    position: relative;
+  }
+  .fruitty-sliding-image {
+    width: 100%;
+    margin-right: -20px;
+    margin-left: 20px;
+  }
+
+  .card {
+    text-align: center;
+    z-index: 0;
+    position: relative;
+    padding-top: 100px;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+
+  
+  .card:before {
+    content:'';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0; left: 0;
+    transform: translateY(100%);
+    transition: 1s cubic-bezier(0, 0, 0, 1);
+  }
+
+  .smoothie-1 .card:before {background: linear-gradient(to bottom, transparent, lightcoral);}
+  .smoothie-2 .card:before {background: linear-gradient(to bottom, transparent, darksalmon);}
+  .smoothie-3 .card:before {background: linear-gradient(to bottom, transparent, lightgoldenrodyellow);}
+  .smoothie-4 .card:before {background: linear-gradient(to bottom, transparent, lightgreen);}
+  .smoothie-5 .card:before {background: linear-gradient(to bottom, transparent, lightblue);}
+
+  .card:hover:before {
+    transform: translateY(0%);
+  }
+
+  .card-header {
+    background: none;
+    border: none;
+  }
+</style>
+
+<!-- Bootstrap : JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+</head>
+<body style="overflow-x: hidden;">
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="moving-header-background" style="  
+  background: url('assets/images/section.jpg') fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+"></div>
+
+<div class="container-fluid" style="
+position: absolute;
+">
+  <div class="row">
+    <div class="col moving-header" style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    ">
+      <div style="
+      width: 70%;
+      margin: auto;
+      ">
+      <h1 style="
+      font-size: 120pt;
+      font-family: 'Abril Fatface', cursive;
+      "><div style="
+          z-index: -1;
+          color: #0c025a;
+        ">TechBase</div>
+        <div style="
+          color: #FFFFFF;
+          z-index: 10;
+        ">Juice</div>
+      </h1>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="container" style="overflow-x: hidden;">
+  <div class="row">
+    <div class="col smoothie-1">
+      <div class="fruitty-sliding-container">
+        <img class="fruitty-sliding-image fruitty-sliding-image-1 " src="/assets/images/fruitty1.png">
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Hippity</h2>
+        </div>
+        <div class="card-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col smoothie-2">
+      <div class="fruitty-sliding-container">
+        <img class="fruitty-sliding-image fruitty-sliding-image-2" src="/assets/images/fruitty2.png"
+        style="
+          position: relative;
+          z-index: -1;
+        ">
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Hoppity</h2>
+        </div>
+        <div class="card-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col smoothie-3">
+      <div class="fruitty-sliding-container">
+        <img class="fruitty-sliding-image fruitty-sliding-image-3" src="/assets/images/fruitty3.png">
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Hallowy</h2>
+        </div>
+        <div class="card-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col smoothie-4">
+      <div class="fruitty-sliding-container">
+        <img class="fruitty-sliding-image fruitty-sliding-image-4" src="/assets/images/fruitty4.png">
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Diggidy</h2>
+        </div>
+        <div class="card-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col smoothie-5">
+      <div class="fruitty-sliding-container">
+        <img class="fruitty-sliding-image fruitty-sliding-image-5" src="/assets/images/fruitty5.png">
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Timbucktoo</h2>
+        </div>
+        <div class="card-body">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height: 30vh"></div>
+
+<script type="application/javascript">
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".moving-header", {
+  scrollTrigger: {
+    trigger: ".moving-header",
+    start: "top top",
+    end: "center center",
+    scrub: 3,
+    pin: true,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container",
+  },
+  scale: .8,
+})
+
+gsap.to(".moving-header-background", {
+  scrollTrigger: {
+    trigger: ".moving-header-background",
+    start: "top top",
+    end: "center 100%",
+    scrub: 3,
+    pin: true,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container",
+  },
+  zIndex: -1,
+  scale: .6,
+})
+
+gsap.from(".fruitty-sliding-image-1", {
+  scrollTrigger: {
+    trigger: ".fruitty-sliding-image-1",
+    start: "top 20%",
+    end: "bottom 60%",
+    scrub: 1,
+    pin: true,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container",
+  },
+  x: 100,
+  rotation: -20,
+  scale: .6,
+})
+
+
+gsap.from(".fruitty-sliding-image-2", {
+  scrollTrigger: {
+    trigger: ".fruitty-sliding-image-2", // selector or element
+    start: "top -50%",  // [trigger] [scroller] positions
+    end: "bottom 106%", // [trigger] [scroller] positions
+    scrub: 1, // or time (in seconds) to catch up
+    pin: true, // or selector or element to pin // only during development!
+    toggleActions: "play pause resume reset",
+    // other actions: complete reverse none
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container", // selector or element
+  },
+  x: '50vw',
+  rotation: 0,
+  scale: 5
+})
+
+gsap.from(".fruitty-sliding-image-3", {
+  scrollTrigger: {
+    trigger: ".fruitty-sliding-image-3", // selector or element
+    start: "top center",  // [trigger] [scroller] positions
+    end: "bottom 101.5%", // [trigger] [scroller] positions
+    scrub: 1, // or time (in seconds) to catch up
+    pin: true, // or selector or element to pin // only during development!
+    toggleActions: "play pause resume reset",
+    // other actions: complete reverse none
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container", // selector or element
+  },
+  x: -1000,
+  rotation: -20,
+})
+
+gsap.from(".fruitty-sliding-image-4", {
+  scrollTrigger: {
+    trigger: ".fruitty-sliding-image-4", // selector or element
+    start: "top center",  // [trigger] [scroller] positions
+    end: "bottom bottom", // [trigger] [scroller] positions
+    scrub: 1, // or time (in seconds) to catch up
+    pin: true, // or selector or element to pin // only during development!
+    toggleActions: "play pause resume reset",
+    // other actions: complete reverse none
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container", // selector or element
+  },
+  x: 500,
+  rotation: 10,
+})
+
+gsap.from(".fruitty-sliding-image-5", {
+  scrollTrigger: {
+    trigger: ".fruitty-sliding-image-5", // selector or element
+    start: "top 10%",  // [trigger] [scroller] positions
+    end: "bottom 46%", // [trigger] [scroller] positions
+    scrub: 1, // or time (in seconds) to catch up
+    pin: true, // or selector or element to pin // only during development!
+    toggleActions: "play pause resume reset",
+    // other actions: complete reverse none
+    pinnedContainer: ".fruitty-sliding-container",
+    endTrigger: ".fruitty-sliding-container", // selector or element
+  },
+  x: -100,
+  rotation: 20,
+  scale: .5
+})
+</script>
+</body>
+</html>
