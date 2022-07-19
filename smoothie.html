@@ -10,8 +10,6 @@
   }
   .fruitty-sliding-image {
     width: 100%;
-    margin-right: -20px;
-    margin-left: 20px;
   }
 
   .card {
@@ -23,6 +21,7 @@
     background: transparent;
     border: none;
     border-radius: 0;
+    background: #FFFFFF;
   }
 
   
@@ -32,7 +31,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 1;
     top: 0; left: 0;
     transform: translateY(100%);
     transition: 1s cubic-bezier(0, 0, 0, 1);
@@ -51,6 +50,40 @@
   .card-header {
     background: none;
     border: none;
+  }
+
+  .card-header h2 {
+    font-family: 'Abril Fatface', cursive;
+    color: #0c025a;
+    text-transform: uppercase;
+  }
+
+  .navbar-brand {
+    font-family: 'Abril Fatface', cursive;
+    color: #0c025a;
+    text-transform: uppercase;
+    font-size: 16pt;
+  }
+
+  .moving-header-background {
+    background: url('/assets/images/smoothie/section.jpg') fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .moving-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    z-index: 2;
   }
 </style>
 
@@ -71,64 +104,37 @@
 
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Tech BaseCamp POC</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto me-0 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">POC Scroll Trigger</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link" href="#">Back to Main TBC</a>
         </li>
+        
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
 
-<div class="moving-header-background" style="  
-  background: url('assets/images/section.jpg') fixed;
-  background-size: cover;
-  width: 100vw;
-  height: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-"></div>
+<div class="moving-header-background"></div>
 
 <div class="container-fluid" style="
 position: absolute;
 ">
   <div class="row">
-    <div class="col moving-header" style="
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 90vh;
-    ">
+    <div class="col moving-header">
       <div style="
       width: 70%;
       margin: auto;
@@ -137,25 +143,30 @@ position: absolute;
       font-size: 120pt;
       font-family: 'Abril Fatface', cursive;
       "><div style="
-          z-index: -1;
           color: #0c025a;
         ">TechBase</div>
         <div style="
           color: #FFFFFF;
-          z-index: 10;
         ">Juice</div>
       </h1>
       </div>
     </div>
   </div>
 </div>
-  
+
+<div class="container p-0">
+  <div class="row">
+    <div class="col fruitty-sliding-container fruitty-sliding-container-1"><img class="fruitty-sliding-image fruitty-sliding-image-1" src="/assets/images/smoothie/fruitty1.png"></div>
+    <div class="col fruitty-sliding-container fruitty-sliding-container-2"><img class="fruitty-sliding-image fruitty-sliding-image-2" src="/assets/images/smoothie/fruitty2.png"></div>
+    <div class="col fruitty-sliding-container fruitty-sliding-container-3"><img class="fruitty-sliding-image fruitty-sliding-image-3" src="/assets/images/smoothie/fruitty3.png"></div>
+    <div class="col fruitty-sliding-container fruitty-sliding-container-4"><img class="fruitty-sliding-image fruitty-sliding-image-4" src="/assets/images/smoothie/fruitty4.png"></div>
+    <div class="col fruitty-sliding-container fruitty-sliding-container-5"><img class="fruitty-sliding-image fruitty-sliding-image-5" src="/assets/images/smoothie/fruitty5.png"></div>
+  </div>
+</div>
+
 <div class="container" style="overflow-x: hidden;">
   <div class="row">
     <div class="col smoothie-1">
-      <div class="fruitty-sliding-container">
-        <img class="fruitty-sliding-image fruitty-sliding-image-1 " src="/assets/images/fruitty1.png">
-      </div>
       <div class="card">
         <div class="card-header">
           <h2>Hippity</h2>
@@ -166,13 +177,6 @@ position: absolute;
       </div>
     </div>
     <div class="col smoothie-2">
-      <div class="fruitty-sliding-container">
-        <img class="fruitty-sliding-image fruitty-sliding-image-2" src="/assets/images/fruitty2.png"
-        style="
-          position: relative;
-          z-index: -1;
-        ">
-      </div>
       <div class="card">
         <div class="card-header">
           <h2>Hoppity</h2>
@@ -183,9 +187,6 @@ position: absolute;
       </div>
     </div>
     <div class="col smoothie-3">
-      <div class="fruitty-sliding-container">
-        <img class="fruitty-sliding-image fruitty-sliding-image-3" src="/assets/images/fruitty3.png">
-      </div>
       <div class="card">
         <div class="card-header">
           <h2>Hallowy</h2>
@@ -196,9 +197,6 @@ position: absolute;
       </div>
     </div>
     <div class="col smoothie-4">
-      <div class="fruitty-sliding-container">
-        <img class="fruitty-sliding-image fruitty-sliding-image-4" src="/assets/images/fruitty4.png">
-      </div>
       <div class="card">
         <div class="card-header">
           <h2>Diggidy</h2>
@@ -209,9 +207,6 @@ position: absolute;
       </div>
     </div>
     <div class="col smoothie-5">
-      <div class="fruitty-sliding-container">
-        <img class="fruitty-sliding-image fruitty-sliding-image-5" src="/assets/images/fruitty5.png">
-      </div>
       <div class="card">
         <div class="card-header">
           <h2>Timbucktoo</h2>
@@ -233,7 +228,7 @@ gsap.to(".moving-header", {
   scrollTrigger: {
     trigger: ".moving-header",
     start: "top top",
-    end: "center center",
+    end: "80% center",
     scrub: 3,
     pin: true,
     toggleActions: "play pause resume reset",
@@ -247,98 +242,128 @@ gsap.to(".moving-header-background", {
   scrollTrigger: {
     trigger: ".moving-header-background",
     start: "top top",
-    end: "center 100%",
+    end: "90% bottom",
     scrub: 3,
     pin: true,
     toggleActions: "play pause resume reset",
     pinnedContainer: ".fruitty-sliding-container",
     endTrigger: ".fruitty-sliding-container",
   },
-  zIndex: -1,
   scale: .6,
 })
 
-gsap.from(".fruitty-sliding-image-1", {
+gsap.set(".fruitty-sliding-image-1", {
+  xPercent: -60,
+  yPercent: 45,
+  zIndex: 2,
+  rotation: '-20deg',
+})
+gsap.set(".fruitty-sliding-image-2", {
+  xPercent: -30,
+  yPercent: 25,
+  rotation: '-10deg',
+  zIndex: 2,
+  scale: 1.5
+})
+gsap.set(".fruitty-sliding-image-3", {
+  xPercent: 0,
+  yPercent: 5,
+  rotation: '0deg',
+  zIndex: 1,
+  scale: 2
+})
+gsap.set(".fruitty-sliding-image-4", {
+  xPercent: 30,
+  yPercent: 25,
+  rotation: '10deg',
+  zIndex: 2,
+  scale: 1.5
+})
+gsap.set(".fruitty-sliding-image-5", {
+  xPercent: 60,
+  yPercent: 45,
+  zIndex: 2,
+  rotation: '20deg',
+})
+gsap.to(".fruitty-sliding-image-1", {
   scrollTrigger: {
     trigger: ".fruitty-sliding-image-1",
-    start: "top 20%",
-    end: "bottom 60%",
+    start: "top top",
+    end: "bottom 65%",
     scrub: 1,
     pin: true,
     toggleActions: "play pause resume reset",
-    pinnedContainer: ".fruitty-sliding-container",
-    endTrigger: ".fruitty-sliding-container",
+    pinnedContainer: ".fruitty-sliding-container-1",
+    endTrigger: ".fruitty-sliding-container-1",
   },
-  x: 100,
-  rotation: -20,
-  scale: .6,
+  xPercent: 60,
+  yPercent: 62,
+  scale: 1,
+  rotation: 0
 })
-
-
-gsap.from(".fruitty-sliding-image-2", {
+gsap.to(".fruitty-sliding-image-2", {
   scrollTrigger: {
-    trigger: ".fruitty-sliding-image-2", // selector or element
-    start: "top -50%",  // [trigger] [scroller] positions
-    end: "bottom 106%", // [trigger] [scroller] positions
-    scrub: 1, // or time (in seconds) to catch up
-    pin: true, // or selector or element to pin // only during development!
+    trigger: ".fruitty-sliding-image-2",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: true,
     toggleActions: "play pause resume reset",
-    // other actions: complete reverse none
-    pinnedContainer: ".fruitty-sliding-container",
-    endTrigger: ".fruitty-sliding-container", // selector or element
+    pinnedContainer: ".fruitty-sliding-container-2",
+    endTrigger: ".fruitty-sliding-container-2",
   },
-  x: '50vw',
-  rotation: 0,
-  scale: 5
+  xPercent: 30,
+  yPercent: 50*.75,
+  scale: 1,
+  rotation: '0',
 })
-
-gsap.from(".fruitty-sliding-image-3", {
+gsap.to(".fruitty-sliding-image-3", {
   scrollTrigger: {
-    trigger: ".fruitty-sliding-image-3", // selector or element
-    start: "top center",  // [trigger] [scroller] positions
-    end: "bottom 101.5%", // [trigger] [scroller] positions
-    scrub: 1, // or time (in seconds) to catch up
-    pin: true, // or selector or element to pin // only during development!
+    trigger: ".fruitty-sliding-image-3",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: true,
     toggleActions: "play pause resume reset",
-    // other actions: complete reverse none
-    pinnedContainer: ".fruitty-sliding-container",
-    endTrigger: ".fruitty-sliding-container", // selector or element
+    pinnedContainer: ".fruitty-sliding-container-3",
+    endTrigger: ".fruitty-sliding-container-3",
   },
-  x: -1000,
-  rotation: -20,
+  xPercent: 0,
+  yPercent: 40*.5,
+  scale: 1,
+  rotation: 0
 })
-
-gsap.from(".fruitty-sliding-image-4", {
+gsap.to(".fruitty-sliding-image-4", {
   scrollTrigger: {
-    trigger: ".fruitty-sliding-image-4", // selector or element
-    start: "top center",  // [trigger] [scroller] positions
-    end: "bottom bottom", // [trigger] [scroller] positions
-    scrub: 1, // or time (in seconds) to catch up
-    pin: true, // or selector or element to pin // only during development!
+    trigger: ".fruitty-sliding-image-4",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: true,
     toggleActions: "play pause resume reset",
-    // other actions: complete reverse none
-    pinnedContainer: ".fruitty-sliding-container",
-    endTrigger: ".fruitty-sliding-container", // selector or element
+    pinnedContainer: ".fruitty-sliding-container-4",
+    endTrigger: ".fruitty-sliding-container-4",
   },
-  x: 500,
-  rotation: 10,
+  xPercent: -30,
+  yPercent: 50*.75,
+  scale: 1,
+  rotation: 0
 })
-
-gsap.from(".fruitty-sliding-image-5", {
+gsap.to(".fruitty-sliding-image-5", {
   scrollTrigger: {
-    trigger: ".fruitty-sliding-image-5", // selector or element
-    start: "top 10%",  // [trigger] [scroller] positions
-    end: "bottom 46%", // [trigger] [scroller] positions
-    scrub: 1, // or time (in seconds) to catch up
-    pin: true, // or selector or element to pin // only during development!
+    trigger: ".fruitty-sliding-image-5",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: true,
     toggleActions: "play pause resume reset",
-    // other actions: complete reverse none
-    pinnedContainer: ".fruitty-sliding-container",
-    endTrigger: ".fruitty-sliding-container", // selector or element
+    pinnedContainer: ".fruitty-sliding-container-5",
+    endTrigger: ".fruitty-sliding-container-5",
   },
-  x: -100,
-  rotation: 20,
-  scale: .5
+  xPercent: -60,
+  yPercent: 62,
+  scale: 1,
+  rotation: 0
 })
 </script>
 </body>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Bootstrap : CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald:wght@200;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+  }
+
+  .navbar-nav .nav-link {
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #000000;
+  }
+  
+  .moving-header-wrapper {
+    position: absolute;
+    width: 100%;
+    margin-top: 15vh;
+  }
+
+  .card {
+    text-align: center;
+    z-index: 0;
+    position: relative;
+    margin-top: -400px;
+    padding-top: 500px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    background: #FFFFFF;
+  }
+
+  
+  .card:before {
+    content:'';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 400px);
+    z-index: -1;
+    top: auto; bottom: 0; left: 0;
+    transform: translateY(50%) scaleY(0);
+    transition: 1s cubic-bezier(0, 0, 0, 1);
+  }
+
+  .bottle-1 .card:before {background: linear-gradient(to bottom, #677AE2, #677AE266 );}
+  .bottle-2 .card:before {background: linear-gradient(to bottom, #D67DB4, #D67DB466 );}
+  .bottle-3 .card:before {background: linear-gradient(to bottom, #DD7E75, #DD7E7566 );}
+  .bottle-4 .card:before {background: linear-gradient(to bottom, #DDBA75, #DDBA7566 );}
+  .bottle-5 .card:before {background: linear-gradient(to bottom, #AEDD73, #AEDD7366 );}
+
+  .card-header {
+    background: none;
+    border: none;
+  }
+
+  .card-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .card-header h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 200;
+    font-size: 14px;
+  }
+
+  .moving-header {
+    background: url('/assets/images/bottle/bg.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 70vh;
+    z-index: 2;
+    border-radius: 9px;
+  }
+  .bottle-sliding-container {
+    transition: .5s  cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    height: 150vh;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+  .bottle-sliding-image {
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,.25));
+    pointer-events: none;
+  }
+
+  .bottle-1, .bottle-2, .bottle-3, .bottle-4, .bottle-5 {
+    position: relative;
+  }
+  .btn-primary {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    color: #FFF;
+    padding: 10px 30px;
+    border: none;
+    transition: .5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(20%) scale(.9);
+  }
+  
+  .bottle-1 .btn-primary {
+    background: #677AE2;
+  }
+  .bottle-2 .btn-primary {
+    background: #D67DB4;
+  }
+  .bottle-3 .btn-primary {
+    background: #DD7E75;
+  }
+  .bottle-4 .btn-primary {
+    background: #DDBA75;
+  }
+  .bottle-5 .btn-primary {
+    background: #AEDD73;
+  }
+
+  .card-footer {
+    border: none;
+    background: none;
+  }
+
+
+  .bottle-col:hover .card:before {
+    transform: translateY(0%) scaleY(1);
+  }
+
+  .bottle-col:hover .btn-primary {
+    color: #FFF;
+    transform: translateY(0%) scale(1.1);
+  }
+
+  .bottle-sliding-container.active {
+    transform: translateX(-75%) translateY(0%) rotate(-15deg) scale(1.1);
+  }
+
+  .scroll-down-indicator {
+    font-family: 'Oswald';
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .scroll-down-indicator:after {
+    content: '▼';
+    background: url(/assets/images/bottle/scroll.png);
+    background-size: contain;
+    width: 29px; height: 29px;
+    display: flex;
+    align-items: center; justify-content: center;
+    margin: 10px auto;
+    color: #FFF;
+    font-size: 10px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+
+  .headline-top {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+  }
+  .headline-center {
+    font-family: 'Oswald', sans-serif;
+    font-size: 111px;
+    font-weight: 200;
+  }
+  .headline-bottom {
+    font-size: 25px;  
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 991px) {
+
+    .moving-header {
+      height: 50vh;
+      padding-top: 0;
+      z-index: -1;
+      text-align: center;
+    }
+    .bottle-sliding-wrapper {
+      padding-top: 100vh;
+    }
+    .bottle-sliding-container {
+      margin-top: -100vh;
+    }
+
+    .headline-top{
+      font-size: 20px;
+      line-height: 0;
+    }
+    .headline-center{
+      font-size: 60px;
+      margin-bottom: 40px;
+    }
+    .headline-bottom{
+      font-size: 16px;  
+    }
+  }
+</style>
+
+<!-- Bootstrap : JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+</head>
+<body style="overflow-x: hidden;">
+
+<nav class="navbar navbar-expand-lg fixed-top" style="background: #FCFCFC;">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="/assets/images/bottle/logo.png" height="67"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav d-flex w-100 text-center mb-2 mb-lg-0">
+        <li class="nav-item flex-fill">
+          <a class="nav-link" href="#">Makeup</a>
+        </li>
+        <li class="nav-item flex-fill">
+          <a class="nav-link" href="#">Body</a>
+        </li>
+        <li class="nav-item flex-fill">
+          <a class="nav-link" href="#">Hair</a>
+        </li>
+        <li class="nav-item flex-fill">
+          <a class="nav-link" href="#">Bath</a>
+        </li>
+        <li class="nav-item flex-fill">
+          <a class="nav-link" href="#">Hydra <sup>3</sup></a>
+        </li>
+        <li class="nav-item flex-fill">
+          <a class="nav-link" href="#">Skin</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="moving-header-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 moving-header">
+        <div style="
+        width: 70%;
+        margin: auto;
+        ">
+        <p class="headline-top">INTRODUCING</p>
+        <h1 class="headline-center">Organic Super Hydra <strong><sup>3</sup></strong></h1>
+        <p class="headline-bottom">The new, lightweight formula absorbs instantly and provides up to 48 hours of moisture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: absolute; bottom: 20px; left: 0; width: 100%;">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center scroll-down-indicator">
+        Scroll Down
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container bottle-sliding-wrapper">
+  <div class="row">
+    <div class="col-lg bottle-col bottle-1 col-6">
+      <div class="col bottle-sliding-container bottle-sliding-container-1"><img class="bottle-sliding-image bottle-sliding-image-1" src="/assets/images/bottle/bottle1.png"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>PURE SEE</h2>
+          <h3>ORGANIC SUPER HYDRA <sup>3</sup></h3>
+        </div>
+        <div class="card-body">
+          <p>Life’s too short for waiting - jump straight into your jeans with our Strawberry Body Yogurt.</p>
+        </div>
+        <div class="card-footer p-0">
+          <a href="#" class="btn-primary">ADD TO CART</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg bottle-col bottle-2 col-6">
+      <div class="col bottle-sliding-container bottle-sliding-container-2" style="z-index: 2"><img class="bottle-sliding-image bottle-sliding-image-2" src="/assets/images/bottle/bottle2.png"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>PASSION FRUIT</h2>
+          <h3>ORGANIC SUPER HYDRA <sup>3</sup></h3>
+        </div>
+        <div class="card-body">
+          <p>Life’s too short for waiting - jump straight into your jeans with our Strawberry Body Yogurt.</p>
+        </div>
+        <div class="card-footer p-0">
+          <a href="#" class="btn-primary">ADD TO CART</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg bottle-col bottle-3 col-6">
+      <div class="col bottle-sliding-container bottle-sliding-container-3" style="z-index: 2"><img class="bottle-sliding-image bottle-sliding-image-3" src="/assets/images/bottle/bottle3.png"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>STRAWBERRY</h2>
+          <h3>ORGANIC SUPER HYDRA <sup>3</sup></h3>
+        </div>
+        <div class="card-body">
+          <p>Life’s too short for waiting - jump straight into your jeans with our Strawberry Body Yogurt.</p>
+        </div>
+        <div class="card-footer p-0">
+          <a href="#" class="btn-primary">ADD TO CART</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg bottle-col bottle-4 col-6 ">
+      <div class="col bottle-sliding-container bottle-sliding-container-4" style="z-index: 2"><img class="bottle-sliding-image bottle-sliding-image-4" src="/assets/images/bottle/bottle4.png"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>MANDARIN</h2>
+          <h3>ORGANIC SUPER HYDRA <sup>3</sup></h3>
+        </div>
+        <div class="card-body">
+          <p>Life’s too short for waiting - jump straight into your jeans with our Strawberry Body Yogurt.</p>
+        </div>
+        <div class="card-footer p-0">
+          <a href="#" class="btn-primary">ADD TO CART</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg bottle-col bottle-5 col-6 offset-3 offset-lg-0 ">
+      <div class="col bottle-sliding-container bottle-sliding-container-5" style="z-index: 2"><img class="bottle-sliding-image bottle-sliding-image-5" src="/assets/images/bottle/bottle5.png"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>ALOE VERA & CUCUMBER</h2>
+          <h3>ORGANIC SUPER HYDRA <sup>3</sup></h3>
+        </div>
+        <div class="card-body">
+          <p>Life’s too short for waiting - jump straight into your jeans with our Strawberry Body Yogurt.</p>
+        </div>
+        <div class="card-footer p-0">
+          <a href="#" class="btn-primary">ADD TO CART</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height: 10vh"></div>
+
+<script>
+  document.querySelectorAll('.bottle-col').forEach(element => {
+    console.log(document.querySelector('.' + element.classList[2] + ' .bottle-sliding-container'))
+    document.querySelector('.' + element.classList[2] + ' .card').addEventListener('mouseenter', function() {
+      document.querySelector('.' + element.classList[2] + ' .bottle-sliding-container').classList.add('active')
+    })
+    document.querySelector('.' + element.classList[2] + ' .card').addEventListener('mouseleave', function() {
+      document.querySelector('.' + element.classList[2] + ' .bottle-sliding-container').classList.remove('active')
+    })
+  });
+</script>
+
+<script type="application/javascript">
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.set(".bottle-sliding-image-1", {
+  xPercent: -100,
+  yPercent: 55,
+  zIndex: 1,
+  rotation: '-16deg',
+})
+gsap.set(".bottle-sliding-image-2", {
+  xPercent: 215,
+  yPercent: 85,
+  rotation: '7deg',
+  zIndex: 5,
+})
+gsap.set(".bottle-sliding-image-3", {
+  xPercent: 200,
+  yPercent: 27,
+  rotation: '-15deg',
+  zIndex: 2,
+})
+gsap.set(".bottle-sliding-image-4", {
+  xPercent: 190,
+  yPercent: 120,
+  rotation: '-41deg',
+  zIndex: 2,
+})
+gsap.set(".bottle-sliding-image-5", {
+  xPercent: 200,
+  yPercent: 45,
+  zIndex: 2,
+  rotation: '24deg',
+})
+gsap.to(".bottle-sliding-image-1", {
+  scrollTrigger: {
+    trigger: ".bottle-sliding-image-1",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-sliding-container-1",
+    endTrigger: ".bottle-sliding-container-1",
+  },
+  xPercent:0,
+  yPercent: 280,
+  rotation: 0
+})
+gsap.to(".bottle-sliding-image-2", {
+  scrollTrigger: {
+    trigger: ".bottle-sliding-image-2",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-sliding-container-2",
+    endTrigger: ".bottle-sliding-container-2",
+  },
+  xPercent: 0,
+  yPercent: 280,
+  rotation: '0',
+})
+gsap.to(".bottle-sliding-image-3", {
+  scrollTrigger: {
+    trigger: ".bottle-sliding-image-3",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-sliding-container-3",
+    endTrigger: ".bottle-sliding-container-3",
+  },
+  xPercent: 0,
+  yPercent: 280,
+  rotation: 0
+})
+gsap.to(".bottle-sliding-image-4", {
+  scrollTrigger: {
+    trigger: ".bottle-sliding-image-4",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-sliding-container-4",
+    endTrigger: ".bottle-sliding-container-4",
+  },
+  xPercent: 0,
+  yPercent: 280,
+  scale: 1,
+  rotation: 0
+})
+gsap.to(".bottle-sliding-image-5", {
+  scrollTrigger: {
+    trigger: ".bottle-sliding-image-5",
+    start: "top top",
+    end: "bottom 65%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-sliding-container-5",
+    endTrigger: ".bottle-sliding-container-5",
+  },
+  xPercent: 0,
+  yPercent: 280,
+  rotation: 0
+})
+
+gsap.set(".bottle-1 .card", {
+  yPercent: -10,
+  zIndex: 0
+})
+gsap.to(".bottle-1 .card", {
+  scrollTrigger: {
+    trigger: ".bottle-1 .card",
+    start: "top 70%",
+    end: "bottom 90%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-1",
+    endTrigger: ".bottle-1",
+  },
+  yPercent: 0,
+})
+
+gsap.set(".bottle-3 .card", {
+  yPercent: -10,
+  zIndex: 0
+})
+gsap.to(".bottle-3 .card", {
+  scrollTrigger: {
+    trigger: ".bottle-3 .card",
+    start: "top 70%",
+    end: "bottom 90%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-3",
+    endTrigger: ".bottle-3",
+  },
+  yPercent: 0,
+})
+
+gsap.set(".bottle-5 .card", {
+  yPercent: -10,
+  zIndex: 0
+})
+gsap.to(".bottle-5 .card", {
+  scrollTrigger: {
+    trigger: ".bottle-5 .card",
+    start: "top 70%",
+    end: "bottom 90%",
+    scrub: 1,
+    pin: false,
+    toggleActions: "play pause resume reset",
+    pinnedContainer: ".bottle-5",
+    endTrigger: ".bottle-5",
+  },
+  yPercent: 0,
+})
+</script>
+</body>
+</html>
